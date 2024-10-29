@@ -1,0 +1,49 @@
+header {
+   display: flex;
+   justify-content: center;
+}
+
+form {
+    display: flex;
+    margin-top: 30px;
+    height: 50px;
+    align-items: center;
+   
+}
+
+input {
+    width: 500px;
+    height: 40px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 10px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: 2px solid rgb(40, 40, 100);
+    border-right: none;
+}
+
+input:hover,
+input:focus {
+    outline: none;
+}
+
+.searchBtn {
+    height: 40px;
+    width: 80px;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 1px;
+    background-color: rgb(58, 58, 143);
+    border: 2px solid rgb(40, 40, 100);
+    color: azure;
+    border-left: none;
+}
+
+button:hover,
+button:focus {
+    outline: none;
+    box-shadow: inset -5px 5px 10px rgba(0, 0, 0, 0.2);
+}

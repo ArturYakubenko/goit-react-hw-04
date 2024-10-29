@@ -1,0 +1,81 @@
+.imageWrap {
+    width: 200px;
+    height: 300px;
+    border: 1px solid;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px  rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(121, 121, 218);
+    position: relative;
+}
+
+.itemPicture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+}
+
+.discribe {
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: rgba(15, 14, 19, 0.5);
+    position:absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(100%);
+}
+
+.imageWrap:hover .discribe {
+    transform: translateY(0);
+}
+
+.discribe p {
+    margin: 0;
+    color: antiquewhite;
+    font-size: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.likes {
+    position: absolute;
+    z-index: 999;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+    align-items: center;
+    top: 0%;
+    right: 0;
+    background-color: rgba(15, 14, 19, 0.5);
+    width: 100%;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-100%);
+}
+.imageWrap:hover .likes {
+    transform: translateY(0);
+}
+
+
+.likes p {
+    margin: 0;
+    padding: 0;
+    color: rgb(201, 191, 207);
+}
+
+.likes button {
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    color: red;
+}

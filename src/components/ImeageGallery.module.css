@@ -1,0 +1,13 @@
+ul {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0;
+    gap: calc((1610px - (302px* 5)) / 4);
+    list-style: none;
+    
+}
+
+li {
+    align-self: start;
+}
