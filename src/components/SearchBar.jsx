@@ -1,7 +1,5 @@
 import css from './SearchBar.module.css'
 
-
-
 const SearchBar = ({ handleSubmit }) => {
     return (
         <header>

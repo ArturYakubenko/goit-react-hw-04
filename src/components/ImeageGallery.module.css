@@ -1,4 +1,4 @@
-ul {
+.galleryList {
     display:flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -8,6 +8,6 @@ ul {
     
 }
 
-li {
+.galleryItem {
     align-self: start;
 }

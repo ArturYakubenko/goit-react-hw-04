@@ -14,35 +14,57 @@ function App() {
   //---------------------------------useState-----------------------------------------------------------------------------
   const [products, setProducts] = useState(null)
   const [showLoader, setShowLoader] = useState(false)
-  const [isError, setIsError] = useState(null)
-  const [vL, setVL] = useState(null)
- 
- //============Modal===================================
+  const [isError, setIsError] = useState(false)
+  const [isValue, setIsValue] = useState(null)
+  //============Modal===================================
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   //=========btnMore==========================================
   const [pageCount, setPageCount] = useState(1)
 
+  //------------------------------------------------setLikes-------------------------------------------------------------------
+
+ const triger = (index) => {
+    setProducts(prevProducts => {
+    
+      return prevProducts.map((product, idx) => {
+        if (idx === index) {
+          return {
+            ...product,
+            likes: product.likes ? product.likes + 1 : 0, 
+          };
+        }
+        return product
+      })
+    })
+  }
   //-----------------------------------------function--searchBar-------------------------------------------------------------
   const handleSubmit = (event) => {
-    const valueS = event.target[0].value.trim()
-    setVL(valueS)
-    setIsError(null)
-    setProducts(null)
-    setPageCount(1)
     event.preventDefault()
-    event.target.reset()
- 
-     if (!valueS) {
+    const valueS = event.target[0].value.trim()
+   
+    if (valueS) {
+      setIsValue(valueS)
+      setIsError(null)
+      setProducts(null)
+      setPageCount(1)
+      event.target.reset()
+    }
+    else {
       toast.error('Будь ласка, введіть текст для пошуку зображень.') 
       return
      }
 
-
-     fetchProducts(pageCount, valueS)
   }
   //---------------------------------------------fetch-------------------------------------------------------------------------------------------
-  const fetchProducts = async (pageNumbr, vL) => {
+   useEffect(() => {
+    if (isValue) {  
+      fetchProducts(pageCount, isValue)
+    }
+  }, [isValue, pageCount])
+ 
+ 
+  const fetchProducts = async (pageNumbr, isValue) => {
      const key = "mO05oA3k0FuZyD1UR_D__mY-QJgn-q0q0vNtz3bnvEY"
       try {
 
@@ -55,9 +77,9 @@ function App() {
           page: `${pageNumbr}`
           }
         })
-    const newData = data.filter(value => value.alt_description.toLowerCase().split(" ").includes(vL.toLowerCase()))
+    const newData = data.filter(value => value.alt_description.toLowerCase().split(" ").includes(isValue.toLowerCase()))
        setProducts(prev => (prev !== null ? [...prev, ...newData] : newData));
-        
+
       }
       catch {
         setIsError(true)
@@ -70,11 +92,11 @@ function App() {
   const BtnMore = () => {
     const newPage = pageCount + 1
     setPageCount(newPage)
-    fetchProducts(newPage, vL)
   }
   //-----------------------------------------------------Modal----------------------------------------------------------------------------------------
   
   const handleImageClick = (imageSrc) => {
+
     setSelectedImage(imageSrc);
     setIsModalOpen(true);
   };
@@ -88,7 +110,7 @@ function App() {
   return (
     <>
       <SearchBar handleSubmit={handleSubmit}/>
-      { isError ? <ErrorMessage/> : <ImageGallery products={products} handleImageClick={handleImageClick} />}
+      {isError ? <ErrorMessage /> : products !== null && <ImageGallery products={products} handleImageClick={handleImageClick} triger={triger } />}
       <Toaster />  
       {products !== null && products.length > 0 && !showLoader && <LoadMoreBtn BtnMore={ BtnMore } />}
       {showLoader && <Loader />}
