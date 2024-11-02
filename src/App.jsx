@@ -14,7 +14,7 @@ function App() {
   //---------------------------------useState-----------------------------------------------------------------------------
   const [products, setProducts] = useState(null)
   const [showLoader, setShowLoader] = useState(false)
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(null)
   const [isValue, setIsValue] = useState(null)
   //============Modal===================================
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -82,7 +82,7 @@ function App() {
 
       }
       catch {
-        setIsError(true)
+        setIsError("error")
       }
       finally {
         setShowLoader(false)
