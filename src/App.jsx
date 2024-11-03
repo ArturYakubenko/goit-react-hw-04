@@ -70,14 +70,16 @@ function App() {
 
         setShowLoader(true)
     
-        const { data } = await axios.get('https://api.unsplash.com/photos', {
+        const { data } = await axios.get('https://api.unsplash.com/search/photos', {
           params: {
-          client_id: `${key}`,
-          per_page: 30,
-          page: `${pageNumbr}`
+            client_id: `${key}`,
+            query: isValue,
+            per_page: 30,
+            page: `${pageNumbr}`
           }
         })
-    const newData = data.filter(value => value.alt_description.toLowerCase().split(" ").includes(isValue.toLowerCase()))
+        const newData = data.results
+        //const newData = data.filter(value => value.alt_description.toLowerCase().split(" ").includes(isValue.toLowerCase()))
        setProducts(prev => (prev !== null ? [...prev, ...newData] : newData));
 
       }
